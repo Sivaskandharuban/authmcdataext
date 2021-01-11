@@ -123,7 +123,7 @@ export default class SfmcApiHelper
 		Utils.logInfo("Get Category Method: " + this._oauthToken);
 		let self = this;	
 			
-		Utils.logInfo("request body = " + JSON.stringify(req.body));
+		Utils.logInfo("request body = " + JSON.stringify(req.query.validationTemplate));
 		if (this._oauthToken!= "")
         {
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
