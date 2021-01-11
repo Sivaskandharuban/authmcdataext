@@ -484,10 +484,18 @@ export default class SfmcApiHelper
 +'                <Fields>'
 +'					<Field>'
 +'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
++'                        <FieldType>EmailAddress</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 
+				}
+				else if(template[key] ==="Email"){
+					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
+					fieldSoapData += '<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>EmailAddress</FieldType>'
++'                        <IsRequired>false</IsRequired>'
++'                    </Field>'
 				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
