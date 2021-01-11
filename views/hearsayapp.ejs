@@ -438,7 +438,7 @@
 	axios({
 			          method: 'GET',
 			          url: 'https://dataintapicall.herokuapp.com/getcategoryidforapp',
-			           data: validationTemplate,
+			           params: validationTemplate,
 			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
