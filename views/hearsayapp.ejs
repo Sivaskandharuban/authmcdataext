@@ -432,18 +432,19 @@
           
         }
 		
-		function getCategoryIDforApp(){
+		function getCategoryIDforApp(validationTemplate){
 		console.log("getCategoryIDforApp function called");
 	
 	axios({
 			          method: 'GET',
 			          url: 'https://dataintapicall.herokuapp.com/getcategoryidforapp',
-			           //data: jsonObject,
-			          //headers: {'Content-Type': 'application/json' }
+			           data: validationTemplate,
+			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
                   //handle success
-                  //return response;	
+                  //return response;
+					console.log("Got category ID for Data extension");
 					console.log(response.data);	
 					//loaddata(jsonObject);				
                   });
@@ -739,7 +740,10 @@ axios({
 					});
 		  }
 		  if(this.state.page==2){
-		  getCategoryIDforApp();
+			  let validationTemplate = {
+                    "Template Name" : this.state.templatename
+			  }
+				getCategoryIDforApp(validationTemplate);
 		  }
 
             
