@@ -124,10 +124,11 @@ export default class SfmcApiHelper
 		let self = this;	
 			
 		Utils.logInfo("request body = " + JSON.stringify(req.query.TemplateName));
+		let TemplateName = JSON.stringify(req.query.TemplateName);
 		if (this._oauthToken!= "")
         {
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.getCategoryIDHelper(this._oauthToken)
+            self.getCategoryIDHelper(this._oauthToken, TemplateName)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -143,8 +144,36 @@ export default class SfmcApiHelper
             res.status(500).send(errorMsg);
         }
 	}
-	public getCategoryIDHelper(oauthAccessToken: string) : Promise<any>
+	public getCategoryIDHelper(oauthAccessToken: string, TemplateName : string) : Promise<any>
 	{
+		
+		let validateName = '<?xml version="1.0" encoding="UTF-8"?>'
++'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'    <s:Header>'
++'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
++'        <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
++'    </s:Header>'
++'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'   <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'      <RetrieveRequest>'
++'         <ObjectType>DataExtension</ObjectType>'
++'         <Properties>ObjectID</Properties>'
++'         <Properties>CustomerKey</Properties>'
++'         <Properties>Name</Properties>'
++'         <Properties>IsSendable</Properties>'
++'         <Properties>SendableSubscriberField.Name</Properties>'
++'         <Filter xsi:type="SimpleFilterPart">'
++'            <Property>Name</Property>'
++'            <SimpleOperator>equals</SimpleOperator>'
++'            <Value>'+TemplateName+'</Value>'
++'         </Filter>'
++'      </RetrieveRequest>'
++'   </RetrieveRequestMsg>'
++'    </s:Body>'
++'</s:Envelope>';
+
+
 		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -472,10 +501,11 @@ export default class SfmcApiHelper
 +'                    </Field>'
 				}
 				else if(key === "Hearsay User Reference ID"){
+					if(template[key]==="Email ID"){
 					sendableSoapData += '<SendableDataExtensionField>'
 +'                    <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>Text</FieldType>'
++'                    <FieldType>EmailAddress</FieldType>'
 +'                </SendableDataExtensionField>'
 +'                <SendableSubscriberField>'
 +'                    <Name>Subscriber Key</Name>'
@@ -487,6 +517,24 @@ export default class SfmcApiHelper
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
+					}
+					else{
+						sendableSoapData += '<SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>Text</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
++'					<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>'
+					}
 
 				}
 				else if(template[key] ==="Email"){
@@ -494,7 +542,7 @@ export default class SfmcApiHelper
 					fieldSoapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsRequired>True</IsRequired>'
 +'                    </Field>'
 				}
 				else{
