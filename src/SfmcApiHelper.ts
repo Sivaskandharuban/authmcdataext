@@ -18,7 +18,7 @@ export default class SfmcApiHelper
 	private Hearsay_Org_ID = '';
 	private validateStatus = '';
 	private validateDEName = '';
-	private isValidated = false;
+	private isValidated = '';
 	//private xmlDoc = '';
     
     
@@ -228,7 +228,7 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-				this.isValidated = this.ValidationForDataExtName(validateName);
+				this.ValidationForDataExtName(validateName);
 				});
 
 			})
@@ -256,7 +256,7 @@ export default class SfmcApiHelper
                 //'Authorization': 'Bearer ' + this._oauthToken
             //};
 		
-		return new Promise<boolean>((resolve, reject) =>
+		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
@@ -276,10 +276,10 @@ export default class SfmcApiHelper
 				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
 				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
 					if(this.validateStatus =='OK' && this.validateDEName!=""){
-						return true;
+						this.isValidated = 'true';
 					}
 					else{
-						return false;
+						this.isValidated = 'false';
 					}
                 
             });
