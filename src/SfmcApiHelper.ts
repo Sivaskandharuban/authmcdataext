@@ -147,7 +147,7 @@ export default class SfmcApiHelper
 	public getCategoryIDHelper(oauthAccessToken: string, TemplateName : string) : Promise<any>
 	{
 		
-		Utils.logInfo("Template Name " + JSON.parse(TemplateName));
+		//Utils.logInfo("Template Name " );
 		
 		let validateName = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
@@ -168,7 +168,7 @@ export default class SfmcApiHelper
 +'         <Filter xsi:type="SimpleFilterPart">'
 +'            <Property>Name</Property>'
 +'            <SimpleOperator>equals</SimpleOperator>'
-+'            <Value>'+TemplateName+'</Value>'
++'            <Value>'+JSON.parse(TemplateName)+'</Value>'
 +'         </Filter>'
 +'      </RetrieveRequest>'
 +'   </RetrieveRequestMsg>'
