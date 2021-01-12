@@ -227,7 +227,7 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-				this.ValidationForDataExtName(validateName);
+				this.isValidated = this.ValidationForDataExtName(validateName);
 				});
 
 			})
@@ -274,7 +274,12 @@ export default class SfmcApiHelper
 				Utils.logInfo('Validation Status : ' + this.validateStatus);
 				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
 				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
-			
+					if(this.validateStatus =='OK' && this.validateDEName!=""){
+						return true;
+					}
+					else{
+						return false;
+					}
                 
             });
 			})
