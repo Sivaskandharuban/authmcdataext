@@ -551,7 +551,7 @@ export default class SfmcApiHelper
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Date</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				else{
