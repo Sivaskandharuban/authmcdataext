@@ -16,6 +16,8 @@ export default class SfmcApiHelper
 	private StatusCode = '';
 	private DataExtensionName = '';
 	private Hearsay_Org_ID = '';
+	private validateStatus = '';
+	private validateDEName = '';
 	//private xmlDoc = '';
     
     
@@ -266,12 +268,12 @@ export default class SfmcApiHelper
                 // success
                 Utils.logInfo("Validation Successful \n\n" + response.data);
 				
-				/*var parser = new xml2js.Parser();
+				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
-				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);*/
+				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
+				Utils.logInfo('Validation Status : ' + this.validateStatus);
+				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
+				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
 			
                 
             })
