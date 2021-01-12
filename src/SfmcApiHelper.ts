@@ -223,25 +223,9 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
+				this.ValidationForDataExtName(validateName);
 				});
-//console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
-				/*Dom.Document doc = response.data.getBodyDocument();
-				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
-					Utils.logInfo(parentNode);
-				for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {
-					Utils.logInfo(ChildNode);
-				for(Dom.XmlNode pchildNode: ChildNode.getChildElements()) {
-					Utils.logInfo(pchildNode);
-				for(Dom.XmlNode ppchildNode: pchildNode.getChildElements()) {
-					Utils.logInfo(ppchildNode);
-       if(ppchildNode.getName() == 'ID'){
-       FolderID=ppchildNode.getText();
-      system.debug('FolderID:'+FolderID);
-       }
-	   }
-	   }
-	   }
-	   }*/
+
 			})
 			.catch((error: any) => {
 						// error
@@ -256,6 +240,41 @@ export default class SfmcApiHelper
 			
         });
 	}
+	
+	private ValidationForDataExtName(ValidationBody : any) : Promise<any>
+	{
+		
+			Utils.logInfo("Validation Body : "+ ValidationBody);
+			
+			let headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this._oauthToken
+            };
+		
+		return new Promise<any>((resolve, reject) =>
+        {
+			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+			 /*axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
+            .then((response: any) => {
+                // success
+                Utils.logInfo("Hearsay_Org_ID Updated Successfully");
+
+                
+            })
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
+
+                reject(errorMsg);
+            });*/
+			
+		});
+	}
+	
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
@@ -551,7 +570,7 @@ export default class SfmcApiHelper
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Date</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else if(template[key] ==="Phone"){
@@ -559,7 +578,7 @@ export default class SfmcApiHelper
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Phone</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else{
