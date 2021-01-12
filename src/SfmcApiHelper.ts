@@ -487,7 +487,7 @@ export default class SfmcApiHelper
 +'                <IsSendable>true</IsSendable>';
 
 				templateNameData += '<Field>'
-+'                        <Name>'+template[key]+</Name>'
++'                        <Name>'+template[key]+'</Name>'
 +'                        <DefaultValue>'+template[key]+'</DefaultValue>'
 +'                        <MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
