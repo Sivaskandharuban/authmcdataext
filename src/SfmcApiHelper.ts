@@ -18,7 +18,7 @@ export default class SfmcApiHelper
 	private Hearsay_Org_ID = '';
 	private validateStatus = '';
 	private validateDEName = '';
-	private isValildated = false;
+	private isValidated = false;
 	//private xmlDoc = '';
     
     
