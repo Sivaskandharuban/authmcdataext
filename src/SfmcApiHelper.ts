@@ -276,7 +276,7 @@ export default class SfmcApiHelper
 				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
 			
                 
-            })
+            });
 			})
             .catch((error: any) => {
                 // error
