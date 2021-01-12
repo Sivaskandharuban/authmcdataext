@@ -554,6 +554,7 @@ export default class SfmcApiHelper
 +'							<DefaultValue>getdate()</DefaultValue>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
+Utils.logInfo("fieldSoapData :" + fieldSoapData);
 				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
