@@ -510,17 +510,7 @@ export default class SfmcApiHelper
 				}
 				else if(key === "Hearsay User Reference ID"){
 					if(template[key]==="Email ID"){
-					sendableSoapData += '<SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>EmailAddress</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template[key]+'</Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
-+'					<Field>'
+					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <MaxLength>254</MaxLength>'
@@ -528,17 +518,7 @@ export default class SfmcApiHelper
 +'                    </Field>'
 					}
 					else{
-						sendableSoapData += '<SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>Text</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template[key]+'</Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
-+'					<Field>'
+						fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <MaxLength>100</MaxLength>'
