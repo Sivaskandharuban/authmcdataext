@@ -514,7 +514,7 @@ export default class SfmcApiHelper
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <MaxLength>254</MaxLength>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 					}
 					else{
@@ -543,7 +543,7 @@ export default class SfmcApiHelper
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <MaxLength>254</MaxLength>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else{
