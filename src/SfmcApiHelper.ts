@@ -446,6 +446,7 @@ export default class SfmcApiHelper
 		let endSoapData = '';
 		let orgIDSoapData = '';
 		let soapData = '';
+		let templateNameData = '';
 		let headerSoapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -483,7 +484,14 @@ export default class SfmcApiHelper
 +'                <CategoryID>'+this.FolderID+'</CategoryID>'
 +'                <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                <Name>'+template[key]+'</Name>'
-+'                <IsSendable>true</IsSendable>'
++'                <IsSendable>true</IsSendable>';
+
+templateNameData += '<Field>'
++'                        <Name>Org ID</Name>'
++'                        <DefaultValue>'+template[key]+'</DefaultValue>'
++'                        <MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>';
 
 		
 				}
@@ -497,6 +505,7 @@ export default class SfmcApiHelper
 					orgIDSoapData += '<Field>'
 +'                        <Name>Org ID</Name>'
 +'                        <DefaultValue>'+template[key]+'</DefaultValue>'
++'                        <MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
@@ -566,7 +575,7 @@ export default class SfmcApiHelper
 			
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
- soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + endSoapData;	    
+ soapData = headerSoapData + bodySoapData + sendableSoapData + templateNameData + orgIDSoapData + fieldSoapData + endSoapData;	    
 	    
         return new Promise<any>((resolve, reject) =>
         {
