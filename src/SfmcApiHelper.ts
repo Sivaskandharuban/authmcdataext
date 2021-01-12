@@ -546,6 +546,14 @@ export default class SfmcApiHelper
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
+				else if(template[key] ==="Birth Date"){
+					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
+					fieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Date</FieldType>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>'
+				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					fieldSoapData += '<Field>'
