@@ -262,7 +262,8 @@ export default class SfmcApiHelper
 				}) 
             .then((response: any) => {
                 // success
-                Utils.logInfo("Validation Successful");
+                Utils.logInfo("Validation Successful \n\n" + response.data);
+				
 				/*var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
