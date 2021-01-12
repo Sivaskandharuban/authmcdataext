@@ -246,19 +246,30 @@ export default class SfmcApiHelper
 		
 			Utils.logInfo("Validation Body : "+ ValidationBody);
 			
-			let headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this._oauthToken
-            };
+			//let headers = {
+                //'Content-Type': 'application/json',
+                //'Authorization': 'Bearer ' + this._oauthToken
+            //};
 		
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 /*axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
+			 axios({
+				method: 'post',
+				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
+				data: ValidationBody,
+				headers: {'Content-Type': 'text/xml'}							
+				}) 
             .then((response: any) => {
                 // success
-                Utils.logInfo("Hearsay_Org_ID Updated Successfully");
-
+                Utils.logInfo("Validation Successful");
+				/*var parser = new xml2js.Parser();
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+				Utils.logInfo('Folder ID : ' + this.FolderID);
+				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
+				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);*/
+			
                 
             })
             .catch((error: any) => {
@@ -270,7 +281,7 @@ export default class SfmcApiHelper
                 Utils.logError(errorMsg);
 
                 reject(errorMsg);
-            });*/
+            });
 			
 		});
 	}
