@@ -256,7 +256,7 @@ export default class SfmcApiHelper
                 //'Authorization': 'Bearer ' + this._oauthToken
             //};
 		
-		return new Promise<any>((resolve, reject) =>
+		return new Promise<boolean>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
