@@ -550,6 +550,7 @@ export default class SfmcApiHelper
 					fieldSoapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
