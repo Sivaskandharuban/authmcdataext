@@ -488,7 +488,6 @@ export default class SfmcApiHelper
 
 				templateNameData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
-+'                        <DefaultValue>'+template[key]+'</DefaultValue>'
 +'                        <MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>';
@@ -550,10 +549,21 @@ export default class SfmcApiHelper
 				}
 				else if(template[key] ==="Email"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					fieldSoapData += '<Field>'
+					sendableSoapData += '<SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>EmailAddress</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
++'					<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <MaxLength>254</MaxLength>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				else{
